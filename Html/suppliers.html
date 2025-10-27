@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Supplier Management | IndiRoot ERP</title>
+  <link rel="stylesheet" href="../Css/common.css">
+  <link rel="stylesheet" href="../Css/suppliers.css">
+</head>
+<body>
+  <!-- ===== NAVBAR ===== -->
+  <header class="navbar">
+    <h1>Supplier Management</h1>
+    <div class="user-info">
+      <span>Welcome, <strong id="userName"></strong> (<span id="userRole"></span>)</span>
+      <button id="logoutBtn" class="btn logout-btn">Logout</button>
+    </div>
+  </header>
+
+  <!-- ===== NAVIGATION MENU ===== -->
+  <nav class="nav-menu">
+    <button id="dashboardBtn" class="nav-btn">Dashboard</button>
+    <button id="customersBtn" class="nav-btn">Customers</button>
+    <button id="productsBtn" class="nav-btn">Products</button>
+    <button id="suppliersBtn" class="nav-btn active">Suppliers</button>
+  </nav>
+
+  <!-- ===== SEARCH & ACTION BAR ===== -->
+  <section class="toolbar">
+    <input type="text" id="searchName" placeholder="Search Supplier by Name...">
+    <input type="text" id="searchPhone" placeholder="Search Supplier by Phone...">
+    <button id="showAddFormBtn" class="btn primary">+ Add New Supplier</button>
+  </section>
+
+  <!-- ===== SUPPLIER FORM ===== -->
+  <section id="supplierFormContainer" class="form-container">
+    <form id="supplierForm">
+      <input type="hidden" id="supplierId" name="supplierId">
+
+      <label for="name">Supplier Name:</label>
+      <input type="text" id="name" name="name" placeholder="Enter supplier name" required>
+
+      <label for="phone">Phone:</label>
+      <input type="text" id="phone" name="phone" placeholder="Enter phone number" required>
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" placeholder="Enter email address">
+
+      <label for="address">Address:</label>
+      <textarea id="address" name="address" placeholder="Enter supplier address"></textarea>
+
+      <label for="productCategory">Product Category:</label>
+      <input type="text" id="productCategory" name="productCategory" placeholder="e.g., Powders, Herbs, etc.">
+
+      <!-- ✅ NEW FIELDS FOR PRODUCT & RATE -->
+      <label for="productName">Product:</label>
+      <select id="productName" name="productName">
+        <option value="">Select Product</option>
+        <!-- Populated dynamically from Google Sheets -->
+      </select>
+
+      <label for="rate">Rate (per unit):</label>
+      <input type="number" id="rate" name="rate" placeholder="Enter rate (e.g., 250)" min="0" step="0.01">
+
+      <div class="form-buttons">
+        <button id="addBtn" class="btn success">Add Supplier</button>
+        <button id="updateBtn" class="btn info" style="display:none;">Update Supplier</button>
+        <button id="cancelBtn" class="btn danger">Cancel</button>
+      </div>
+    </form>
+  </section>
+
+  <!-- ===== SUPPLIER TABLE ===== -->
+  <section class="table-section">
+    <table id="suppliersTable">
+      <thead>
+        <tr>
+          <th>Supplier ID</th>
+          <th>Name</th>
+          <th>Phone</th>
+          <th>Email</th>
+          <th>Address</th>
+          <th>Product</th>
+          <th>Rate</th>
+          <th>Category</th>
+          <th>Created Date</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody id="supplierTableBody">
+        <!-- Rows will be inserted dynamically -->
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ===== MESSAGE BOX ===== -->
+  <div id="messageBox" class="message-box"></div>
+
+  <!-- ===== SCRIPT ===== -->
+  <script src="../JavaScript/suppliers.js"></script>
+</body>
+</html>

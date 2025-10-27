@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Management</title>
+  <link rel="stylesheet" href="../Css/dashboard.css">
+  <link rel="stylesheet" href="../Css/products.css">
+   <link rel="stylesheet" href="../Css/common.css">
+</head>
+
+<body>
+  <header>
+    <div class="logo-container">
+      <img src="../Images/Logo.png" alt="Company Logo" class="logo">
+    </div>
+    <div class="user-info">
+      <span>IndiRoot Exims</span>
+    </div>
+    <div class="user-info">
+      Logged in as: <span id="userName"></span> | Role: <span id="userRole"></span>
+      <button id="logoutBtn" style="margin-left: 10px; padding: 5px 15px; background: #d9534f; color: white; border: none; border-radius: 4px; cursor: pointer;">Logout</button>
+    </div>
+  </header>
+
+  <nav style="padding: 10px; text-align: center;">
+    <button id="dashboardBtn">Dashboard</button>
+    <button id="customersBtn">Customers</button>
+    <button id="suppliersBtn">Suppliers</button>
+  </nav>
+
+  <main> 
+    <!-- Product Form (Hidden by default) -->
+    <div id="productFormContainer" style="display:none;">
+      <section id="form-section">
+        <h2>Add or Edit Product</h2>
+        
+        <form id="productForm">
+          <div class="form-row">
+            <input type="text" id="productName" placeholder="Product Name" required>
+            <input type="text" id="category" placeholder="Category (optional)">
+          </div>
+
+          <div class="form-row">
+            <textarea id="description" placeholder="Description (optional)" rows="3"></textarea>
+          </div>
+
+          <div class="buttons" style="justify-content:center;">
+            <button type="button" id="addBtn">Add Product</button>
+            <button type="button" id="updateBtn" style="display:none;">Update Product</button>
+            <button type="button" id="cancelBtn" style="display:none;">Cancel</button>
+          </div>
+        </form>
+      </section>
+    </div>
+
+    <hr>
+
+    <!-- Product List Section -->
+    <section>
+      <div style="text-align: right; margin-bottom: 16px;">
+        <button id="showAddFormBtn" class="action-btn" style="background: #0055a5; color: #fff; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer;">Add Product</button>
+      </div>
+
+      <section id="table-section">
+        <h2>Product Catalog</h2>
+        <table id="productsTable">
+          <thead>
+            <tr>
+              <th>Product ID</th>
+              <th>Product Name</th>
+              <th>Category</th>
+              <th>Description</th>
+              <th>Created Date</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </section>
+    </section>
+  </main>
+
+  <script src="../JavaScript/products.js"></script>
+  <script src="../JavaScript/auth.js"></script>
+  
+</body>
+</html>

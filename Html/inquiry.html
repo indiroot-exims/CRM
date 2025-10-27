@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inquiry Management</title>
+  <link rel="stylesheet" href="../Css/dashboard.css">
+  <link rel="stylesheet" href="../Css/inquiry.css">
+   <link rel="stylesheet" href="../Css/common.css">
+</head>
+
+<body>
+  <header>
+    <div class="logo-container">
+      <img src="../Images/Logo.png" alt="Company Logo" class="logo">
+    </div>
+    <div class="user-info">
+      <span>IndiRoot Exims</span>
+    </div>
+    <div class="user-info">
+      Logged in as: <span id="userName"></span> | Role: <span id="userRole"></span>
+      <button id="logoutBtn" style="margin-left: 10px; padding: 5px 15px; background: #d9534f; color: white; border: none; border-radius: 4px; cursor: pointer;">Logout</button>
+    </div>
+  </header>
+
+  <nav style="padding: 10px; text-align: center;">
+    <button id="dashboardBtn">Dashboard</button>
+    <button id="customersBtn">Customers</button>
+    <button id="productsBtn">Products</button>
+  </nav>
+
+  <main> 
+    <!-- Inquiry Form (Hidden by default) -->
+    <div id="inquiryFormContainer" style="display:none;">
+      <section id="form-section">
+        <h2>Add or Edit Inquiry</h2>
+        
+        <form id="inquiryForm">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="customerId">Customer *</label>
+              <select id="customerId" required>
+                <option value="">Select Customer</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="products-section">
+            <div class="products-header">
+              <h3>Products</h3>
+              <button type="button" id="addProductBtn" class="add-product-btn">+ Add Product</button>
+            </div>
+            <div id="productsArea"></div>
+          </div>
+
+          <div class="buttons">
+            <button type="button" id="addBtn">Add Inquiry</button>
+            <button type="button" id="updateBtn" style="display:none;">Update Inquiry</button>
+            <button type="button" id="cancelBtn" style="display:none;">Cancel</button>
+          </div>
+        </form>
+      </section>
+    </div>
+
+    <hr>
+
+    <!-- Inquiry List Section -->
+    <section>
+      <div style="text-align: right; margin-bottom: 16px;">
+        <button id="showAddFormBtn" class="action-btn" style="background: #0055a5; color: #fff; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer;">Add Inquiry</button>
+      </div>
+
+      <div style="text-align:center; margin-bottom:20px;">
+        <input type="text" id="searchCustomer" placeholder="Search by Customer ID or Name (3+ chars)" style="width: 300px; padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
+      </div>
+
+      <section id="table-section">
+        <h2>Inquiry Records</h2>
+        <table id="inquiriesTable">
+          <thead>
+            <tr>
+              <th>Sub-Inquiry ID</th>
+              <th>Inquiry ID</th>
+              <th>Customer</th>
+              <th>Product</th>
+              <th>Quantity</th>
+              <th>Rate</th>
+              <th>Status</th>
+              <th>Note</th>
+              <th>Inquiry Date</th>
+              <th>Last Updated</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </section>
+    </section>
+  </main>
+
+  <script src="../JavaScript/inquiry.js"></script>
+  <script>
+    // Add product button handler
+    document.getElementById("addProductBtn").addEventListener("click", () => {
+      addProductRow();
+    });
+  </script>
+</body>
+</html>
