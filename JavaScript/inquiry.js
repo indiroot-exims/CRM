@@ -232,7 +232,7 @@ async function submitInquiry(isUpdate) {
   
   if (isUpdate) {
     // Update single sub-inquiry
-    formData.append("updateSubInquiry", "true");
+    formData.append("action", "updateSubInquiry");
     formData.append("subInquiryId", editingSubInquiryId);
     formData.append("quantity", products[0].quantity);
     formData.append("rate", products[0].rate);
@@ -240,7 +240,7 @@ async function submitInquiry(isUpdate) {
     formData.append("note", products[0].note);
   } else {
     // Add new inquiry
-    formData.append("addInquiry", "true");
+    formData.append("action", "addInquiry");
     formData.append("customerId", customerId);
     formData.append("products", JSON.stringify(products));
   }
