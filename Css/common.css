@@ -1,0 +1,262 @@
+/* ===============================
+   COMMON PROJECT STYLESHEET
+   Applies to: All ERP pages
+   Includes: Header, Nav, Footer, Table, Layout, Responsive
+   =============================== */
+
+/* Reset & Base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', 'Segoe UI', Tahoma, sans-serif;
+  background: #f6f8fa;
+  color: #333;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ===============================
+   HEADER
+   =============================== */
+header {
+  background-color: #003366;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+header .logo-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+header .logo {
+  width: 45px;
+  height: 45px;
+  border-radius: 6px;
+  object-fit: contain;
+}
+
+header h1 {
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+header .user-section {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+header .user-section span {
+  font-size: 14px;
+}
+
+.logout-btn {
+  background: #d9534f;
+  border: none;
+  color: #fff;
+  padding: 6px 14px;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.logout-btn:hover {
+  background: #b52b27;
+}
+
+/* ===============================
+   NAVIGATION
+   =============================== */
+nav {
+  background-color: #004b99;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 10px 0;
+  gap: 8px;
+}
+
+nav button {
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-weight: 500;
+  font-size: 15px;
+  padding: 10px 18px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+nav button:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+nav button.active {
+  background-color: #002b66;
+}
+
+/* ===============================
+   MAIN CONTENT
+   =============================== */
+main {
+  flex: 1;
+  padding: 30px 8%;
+}
+
+/* Page Title */
+.page-title {
+  font-size: 24px;
+  font-weight: 600;
+  color: #003366;
+  margin-bottom: 25px;
+}
+
+/* Card Container */
+.card {
+  background: #fff;
+  border-radius: 10px;
+  padding: 24px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+  margin-bottom: 30px;
+}
+
+/* ===============================
+   TABLE DESIGN
+   =============================== */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+}
+
+thead {
+  background-color: #f1f3f5;
+}
+
+th, td {
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 1px solid #e0e0e0;
+  font-size: 14px;
+}
+
+th {
+  color: #003366;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+tr:hover {
+  background-color: #f8f9fa;
+}
+
+/* ===============================
+   FOOTER
+   =============================== */
+footer {
+  background-color: #003366;
+  color: #fff;
+  text-align: center;
+  padding: 12px 0;
+  font-size: 14px;
+  margin-top: auto;
+}
+
+/* ===============================
+   BUTTONS (Common Utility)
+   =============================== */
+.primary-btn {
+  background-color: #0055a5;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.primary-btn:hover {
+  background-color: #003d7a;
+}
+
+.secondary-btn {
+  background-color: #6c757d;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.secondary-btn:hover {
+  background-color: #5a6268;
+}
+
+/* ===============================
+   RESPONSIVE DESIGN
+   =============================== */
+@media (max-width: 900px) {
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: center;
+    padding: 15px;
+  }
+
+  header .logo-container {
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  nav {
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  nav button {
+    width: 100%;
+    max-width: 400px;
+    margin: auto;
+  }
+
+  main {
+    padding: 20px 5%;
+  }
+
+  table {
+    font-size: 13px;
+  }
+
+  th, td {
+    padding: 10px;
+  }
+}
+
+/* ===============================
+   MOBILE TABLE SCROLL
+   =============================== */
+@media (max-width: 600px) {
+  .table-container {
+    overflow-x: auto;
+  }
+
+  table {
+    min-width: 600px;
+  }
+}
