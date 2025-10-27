@@ -1,4 +1,4 @@
-const scriptURL = "https://script.google.com/macros/s/AKfycbywtNWooKfIiBOmwzYyVJE2WYIAvYVMghIKpHMR9Ua3gnoHWqbAF62rDRXszG7dndWmLA/exec";
+const scriptURL = "https://script.google.com/macros/s/AKfycbwyE_nB_uT1Ow8t96oTRiEGz6UVdMF6JGNzTSepCI6IEiajipMD4vHQx5TnS1QGNY8DpA/exec";
 
 let editingCustomerId = null;
 
@@ -225,3 +225,4 @@ function filterCustomers() {
   }
   displayCustomers(filtered);
 }
+
