@@ -1,4 +1,4 @@
-const scriptURL = "https://script.google.com/macros/s/AKfycbywtNWooKfIiBOmwzYyVJE2WYIAvYVMghIKpHMR9Ua3gnoHWqbAF62rDRXszG7dndWmLA/exec";
+const scriptURL = "https://script.google.com/macros/s/AKfycbwyE_nB_uT1Ow8t96oTRiEGz6UVdMF6JGNzTSepCI6IEiajipMD4vHQx5TnS1QGNY8DpA/exec";
 
 let editingSubInquiryId = null;
 let productMap = {}; // {PROD-001: "Natural Moringa Leaf Powder"}
@@ -77,7 +77,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 async function loadCustomers() {
   try {
     const response = await fetch(`${scriptURL}?getCustomers`);
-    const customers = await response.json();
+    const result = await response.json();
+    const customers = Array.isArray(result.data) ? result.data : [];
     
     // Create customer map
     customers.forEach(customer => {
@@ -101,13 +102,12 @@ async function loadCustomers() {
 async function loadProducts() {
   try {
     const response = await fetch(`${scriptURL}?getProducts`);
-    const products = await response.json();
-    
+    const result = await response.json();
+    const products = Array.isArray(result.data) ? result.data : [];
     // Create product map
     products.forEach(product => {
       productMap[product[0]] = product[1]; // {PROD-001: "Natural Moringa..."}
     });
-    
     // Store for dropdown population
     window._allProducts = products;
   } catch (error) {
@@ -118,7 +118,8 @@ async function loadProducts() {
 async function loadInquiries() {
   try {
     const response = await fetch(`${scriptURL}?getInquiries`);
-    const data = await response.json();
+    const result = await response.json();
+    const data = Array.isArray(result.data) ? result.data : [];
     window._loadedInquiryRows = data;
     displayInquiries(data);
   } catch (error) {
