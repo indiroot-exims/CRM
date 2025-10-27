@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login | IndiRoot Exims CRM</title>
+  <link rel="stylesheet" href="../Css/login.css">
+</head>
+<body>
+  <div class="login-wrapper">
+    <div class="login-container">
+      <!-- Logo and Branding -->
+      <div class="brand">
+        <img src="../Images/Logo.png" alt="IndiRoot Exims Logo" class="logo"> <!-- Replace logo.png with your actual logo filename -->
+        <h1 class="company-name">IndiRoot Exims</h1>
+      </div>
+
+      <!-- Login Form -->
+      <form id="loginForm" class="login-form" onsubmit="loginUser(event)">
+        <h2>Login to CRM</h2>
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input type="text" id="username" placeholder="Enter username" required>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" placeholder="Enter password" required>
+        </div>
+            <p id="message"></p>
+        <button type="submit" class="login-btn">Login</button>
+        <p id="error" class="error-msg"></p>
+      </form>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+      © 2025 IndiRoot Exims | All Rights Reserved
+    </footer>
+  </div>
+
+  <script src="../JavaScript/login.js"></script>
+</body>
+</html>
