@@ -1,0 +1,306 @@
+/* ===========================
+   GLOBAL STYLING
+=========================== */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f4f6f9;
+  margin: 0;
+  padding: 0;
+  color: #1e293b;
+}
+
+/* ===========================
+   HEADER
+=========================== */
+header {
+  background-color: #ffffff;
+  color: #141313;
+  padding: 15px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.logo {
+  height: 45px;
+  object-fit: contain;
+}
+
+.user-info {
+  font-size: 16px;
+  font-weight: 500;
+  color: #334155;
+}
+
+/* ===========================
+   MAIN LAYOUT
+=========================== */
+main {
+  width: 90%;
+  max-width: 1400px;
+  margin: 20px auto;
+  background-color: #ffffff;
+  padding: 25px 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+/* ===========================
+   SECTION HEADINGS
+=========================== */
+section {
+  margin-bottom: 40px;
+}
+
+h2 {
+  color: #0055a5;
+  margin-bottom: 20px;
+  text-align: center;
+  border-bottom: 2px solid #dee2e6;
+  padding-bottom: 10px;
+  font-size: 1.6rem;
+  font-weight: 600;
+}
+
+/* ===========================
+   FORM STYLING
+=========================== */
+#customerForm {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.form-row {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.form-row input[type="text"],
+.form-row input[type="number"],
+.form-row input[type="email"],
+.form-row select {
+  flex: 1;
+  padding: 10px 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 15px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  background-color: #ffffff;
+}
+
+input:focus,
+select:focus {
+  border-color: #0055a5;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 85, 165, 0.1);
+}
+
+/* ===========================
+   FORM BUTTONS
+=========================== */
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+button {
+  background-color: #0055a5;
+  color: white;
+  border: none;
+  padding: 10px 25px;
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background-color: #003e7a;
+  transform: translateY(-1px);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+button[type="reset"] {
+  background-color: #e2e8f0;
+  color: #1e293b;
+}
+
+button[type="reset"]:hover {
+  background-color: #cbd5e1;
+}
+
+/* ===========================
+   TABLE STYLING
+=========================== */
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+  border-radius: 8px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
+}
+
+#customersTable {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fafbfc;
+  border-radius: 6px;
+  overflow: hidden;
+  min-width: 700px;
+}
+
+#customersTable th,
+#customersTable td {
+  border: 1px solid #e2e8f0;
+  padding: 10px 14px;
+  text-align: left;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+#customersTable th {
+  background-color: #0055a5;
+  color: #ffffff;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+#customersTable tr:nth-child(even) {
+  background-color: #f8fafc;
+}
+
+#customersTable tr:hover {
+  background-color: #eef4fb;
+  transition: background-color 0.2s ease;
+}
+
+/* ===========================
+   ACTION BUTTONS
+=========================== */
+.action-btn {
+  padding: 6px 12px;
+  font-size: 13px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.edit-btn {
+  background-color: #ffc107;
+  color: #1e293b;
+}
+
+.edit-btn:hover {
+  background-color: #e0a800;
+}
+
+.delete-btn {
+  background-color: #dc3545;
+  color: white;
+}
+
+.delete-btn:hover {
+  background-color: #b02a37;
+}
+
+/* ===========================
+   RESPONSIVE DESIGN
+=========================== */
+
+/* Tablets */
+@media (max-width: 1024px) {
+  main {
+    width: 95%;
+    padding: 20px;
+  }
+
+  #customersTable {
+    font-size: 14px;
+  }
+
+  .form-row {
+    gap: 10px;
+  }
+}
+
+/* Phones */
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .form-row {
+    flex-direction: column;
+  }
+
+  button {
+    width: 100%;
+  }
+
+  .buttons {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  h2 {
+    font-size: 1.3rem;
+  }
+}
+
+/* Small Phones */
+@media (max-width: 480px) {
+  body {
+    font-size: 14px;
+  }
+
+  header {
+    padding: 10px 20px;
+  }
+
+  .logo {
+    height: 35px;
+  }
+
+  input,
+  select {
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  button {
+    font-size: 13px;
+    padding: 9px 18px;
+  }
+
+  th,
+  td {
+    font-size: 13px;
+    padding: 6px 10px;
+  }
+
+  h2 {
+    font-size: 1.1rem;
+  }
+
+  .table-container {
+    border: 1px solid #ddd;
+  }
+}

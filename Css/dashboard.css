@@ -1,0 +1,144 @@
+/* ====== GLOBAL LAYOUT ====== */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #dde8e8;
+  color: #1c1c1c;
+}
+
+/* ====== HEADER ====== */
+header {
+  background-color: #fcfdfd;
+  color: #1d1c1c;
+  padding: 15px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.logo {
+  height: 45px;
+}
+
+.user-info {
+  font-size: 16px;
+  font-weight: 500;
+  margin-top: 5px;
+}
+
+/* ====== MAIN SECTION ====== */
+main {
+  text-align: center;
+  margin: 60px auto;
+  max-width: 1000px;
+  padding: 0 20px;
+}
+
+h2 {
+  color: #0275d8;
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+/* ====== MENU BUTTONS ====== */
+.menu-buttons {
+  margin-top: 25px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+button {
+  background-color: #ffffff;
+  border: 2px solid #0275d8;
+  color: #0275d8;
+  font-size: 16px;
+  font-weight: 500;
+  padding: 12px 40px;
+  margin: 10px;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: all 0.3s ease-in-out;
+  min-width: 180px;
+}
+
+button:hover {
+  background-color: #0275d8;
+  color: white;
+  transform: scale(1.05);
+}
+
+/* ====== RESPONSIVE DESIGN ====== */
+
+/* Tablets */
+@media (max-width: 900px) {
+  header {
+    padding: 15px 20px;
+  }
+
+  h2 {
+    font-size: 24px;
+  }
+
+  button {
+    font-size: 15px;
+    padding: 10px 30px;
+  }
+}
+
+/* Phones (Landscape and Portrait) */
+@media (max-width: 600px) {
+  header {
+    flex-direction: column;
+    text-align: center;
+    gap: 10px;
+  }
+
+  .logo {
+    margin-bottom: 8px;
+    height: 40px;
+  }
+
+  .user-info {
+    font-size: 15px;
+  }
+
+  main {
+    margin-top: 40px;
+    padding: 0 15px;
+  }
+
+  .menu-buttons {
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+
+  button {
+    width: 85%;
+    max-width: 280px;
+    font-size: 15px;
+    margin: 8px 0;
+  }
+
+  h2 {
+    font-size: 22px;
+  }
+}
+
+/* Small Devices (Very small phones) */
+@media (max-width: 400px) {
+  h2 {
+    font-size: 20px;
+  }
+
+  button {
+    font-size: 14px;
+    padding: 10px 25px;
+    width: 90%;
+  }
+}

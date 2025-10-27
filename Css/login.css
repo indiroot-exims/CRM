@@ -1,0 +1,198 @@
+/* ===== Base Reset and Layout ===== */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #3b82f6, #06b6d4);
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.login-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ===== Login Container ===== */
+.login-container {
+  background: #fff;
+  width: 350px;
+  max-width: 90%;
+  padding: 30px 40px;
+  border-radius: 14px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+  text-align: center;
+  transition: all 0.3s ease-in-out;
+}
+
+/* ===== Branding Section ===== */
+.brand {
+  margin-bottom: 20px;
+}
+
+.logo {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  margin-bottom: 10px;
+}
+
+.company-name {
+  margin: 0;
+  font-size: 22px;
+  color: #0f172a;
+  font-weight: 600;
+}
+
+.tagline {
+  font-size: 13px;
+  color: #475569;
+  margin-top: 4px;
+}
+
+/* ===== Login Form ===== */
+.login-form h2 {
+  margin: 10px 0 20px;
+  color: #2563eb;
+  font-size: 18px;
+  border-bottom: 1px solid #e2e8f0;
+  padding-bottom: 5px;
+}
+
+.form-group {
+  text-align: left;
+  margin-bottom: 15px;
+}
+
+label {
+  font-size: 13px;
+  color: #334155;
+  font-weight: 500;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  box-sizing: border-box;
+}
+
+input:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 4px #60a5fa;
+}
+
+.login-btn {
+  width: 100%;
+  background: #3b82f6;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 6px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.login-btn:hover {
+  background: #2563eb;
+}
+
+/* ===== Error Message ===== */
+.error-msg {
+  color: #dc2626;
+  font-size: 13px;
+  margin-top: 10px;
+}
+
+/* ===== Footer ===== */
+.footer {
+  color: #e2e8f0;
+  font-size: 13px;
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* ===== Responsive Design ===== */
+
+/* Medium screens (tablets) */
+@media (max-width: 768px) {
+  .login-container {
+    width: 100%;
+    padding: 25px 30px;
+  }
+
+  .company-name {
+    font-size: 20px;
+  }
+
+  .login-form h2 {
+    font-size: 17px;
+  }
+
+  input {
+    font-size: 13px;
+  }
+
+  .login-btn {
+    font-size: 14px;
+  }
+}
+
+/* Small screens (phones) */
+@media (max-width: 480px) {
+  body {
+    padding: 15px;
+  }
+
+  .login-container {
+    padding: 20px;
+    border-radius: 10px;
+  }
+
+  .logo {
+    width: 65px;
+    height: 65px;
+  }
+
+  .company-name {
+    font-size: 18px;
+  }
+
+  .tagline {
+    font-size: 12px;
+  }
+
+  .login-form h2 {
+    font-size: 16px;
+  }
+
+  label {
+    font-size: 12px;
+  }
+
+  input {
+    font-size: 13px;
+    padding: 8px;
+  }
+
+  .login-btn {
+    padding: 9px;
+    font-size: 14px;
+  }
+
+  .footer {
+    font-size: 12px;
+  }
+}

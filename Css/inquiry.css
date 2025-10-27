@@ -1,0 +1,400 @@
+/* ============================
+   INQUIRIES PAGE – PAGE SPECIFIC STYLES
+   Common layout, typography, and color variables
+   are handled by common.css
+============================ */
+
+/* ---------- MAIN CONTAINER ---------- */
+main {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* ---------- FORM SECTION ---------- */
+#form-section {
+  background: #fff;
+  border: 1px solid var(--border-color, #ddd);
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 24px;
+  box-shadow: var(--shadow-sm, 0 2px 4px rgba(0, 0, 0, 0.05));
+}
+
+#form-section h2 {
+  margin: 0 0 20px;
+  color: var(--text-primary, #333);
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+/* ---------- FORM STYLES ---------- */
+#inquiryForm {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-group label {
+  font-weight: 500;
+  font-size: 14px;
+  color: #495057;
+}
+
+.form-row input,
+.form-row select,
+.form-row textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 15px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-row input:focus,
+.form-row select:focus,
+.form-row textarea:focus {
+  outline: none;
+  border-color: var(--accent-color, #0055a5);
+  box-shadow: 0 0 0 3px rgba(0, 85, 165, 0.15);
+}
+
+/* ---------- PRODUCTS SECTION (WITHIN FORM) ---------- */
+.products-section {
+  background: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 6px;
+  padding: 16px;
+}
+
+.products-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.products-header h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  color: #495057;
+}
+
+.add-product-btn {
+  background: #28a745;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.add-product-btn:hover {
+  background: #218838;
+}
+
+/* ---------- PRODUCT ROW (INLINE PRODUCTS) ---------- */
+#productsArea {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.product-row {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1.5fr 2fr auto;
+  gap: 12px;
+  padding: 12px;
+  background: #fff;
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+  align-items: center;
+}
+
+.product-row input,
+.product-row select {
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  width: 100%;
+}
+
+.product-row input:focus,
+.product-row select:focus {
+  outline: none;
+  border-color: var(--accent-color, #0055a5);
+}
+
+.product-row .remove-btn {
+  background: #dc3545;
+  color: #fff;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-size: 13px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.2s ease;
+}
+
+.product-row .remove-btn:hover {
+  background: #c82333;
+}
+
+/* ---------- ACTION BUTTONS ---------- */
+.buttons {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.buttons button {
+  flex: 1;
+  min-width: 140px;
+  max-width: 220px;
+  padding: 10px 24px;
+  border: none;
+  border-radius: 4px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+#addBtn,
+#updateBtn {
+  background: var(--accent-color, #0055a5);
+  color: #fff;
+}
+
+#addBtn:hover,
+#updateBtn:hover {
+  background: #003d7a;
+}
+
+#cancelBtn {
+  background: #6c757d;
+  color: #fff;
+}
+
+#cancelBtn:hover {
+  background: #5a6268;
+}
+
+.buttons button:active {
+  transform: translateY(1px);
+}
+
+/* ---------- TABLE SECTION ---------- */
+#table-section {
+  background: #fff;
+  border: 1px solid var(--border-color, #ddd);
+  border-radius: 8px;
+  padding: 24px;
+  box-shadow: var(--shadow-sm, 0 2px 4px rgba(0, 0, 0, 0.05));
+  overflow-x: auto;
+}
+
+#table-section h2 {
+  margin: 0 0 20px;
+  color: var(--text-primary, #333);
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+/* ---------- INQUIRIES TABLE ---------- */
+#inquiriesTable {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  min-width: 900px;
+}
+
+#inquiriesTable thead {
+  background: #f8f9fa;
+  border-bottom: 2px solid #dee2e6;
+}
+
+#inquiriesTable th {
+  padding: 12px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 13px;
+  color: #495057;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
+#inquiriesTable td {
+  padding: 12px;
+  font-size: 14px;
+  color: #212529;
+  white-space: nowrap;
+}
+
+#inquiriesTable tbody tr {
+  border-bottom: 1px solid #e9ecef;
+  transition: background-color 0.15s ease;
+}
+
+#inquiriesTable tbody tr:hover {
+  background-color: #f8f9fa;
+}
+
+/* ---------- TABLE ACTION BUTTONS ---------- */
+.action-btn {
+  padding: 6px 16px;
+  border: none;
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.edit-btn {
+  background: #ffc107;
+  color: #000;
+}
+
+.edit-btn:hover {
+  background: #e0a800;
+}
+
+/* ---------- HORIZONTAL RULE ---------- */
+hr {
+  border: none;
+  border-top: 1px solid #dee2e6;
+  margin: 24px 0;
+}
+
+/* ---------- EMPTY & LOADING STATES ---------- */
+#inquiriesTable tbody:empty::after {
+  content: "No inquiries found. Click 'Add Inquiry' to create your first inquiry.";
+  display: block;
+  text-align: center;
+  padding: 40px 20px;
+  color: #6c757d;
+  font-style: italic;
+}
+
+.loading {
+  text-align: center;
+  padding: 40px;
+  color: #6c757d;
+}
+
+/* ---------- STATUS STYLING ---------- */
+td:has(.status) {
+  font-weight: 500;
+}
+
+/* ---------- RESPONSIVE DESIGN ---------- */
+@media (max-width: 1024px) {
+  .product-row {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .product-row .remove-btn {
+    grid-column: span 2;
+    width: 100%;
+  }
+
+  #table-section {
+    overflow-x: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  main {
+    padding: 16px;
+  }
+
+  #form-section {
+    padding: 16px;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .buttons {
+    flex-direction: column;
+  }
+
+  .buttons button {
+    width: 100%;
+  }
+
+  .products-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .add-product-btn {
+    width: 100%;
+  }
+
+  .product-row {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  #table-section {
+    padding: 16px;
+  }
+
+  #inquiriesTable {
+    min-width: 700px;
+  }
+}
+
+@media (max-width: 480px) {
+  main {
+    padding: 10px;
+  }
+
+  #form-section,
+  #table-section {
+    padding: 14px;
+  }
+
+  #form-section h2,
+  #table-section h2 {
+    font-size: 1.2rem;
+  }
+
+  .add-product-btn {
+    padding: 10px;
+    font-size: 13px;
+  }
+
+  .action-btn {
+    padding: 5px 10px;
+    font-size: 12px;
+  }
+}

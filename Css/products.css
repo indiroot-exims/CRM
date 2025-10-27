@@ -1,0 +1,305 @@
+/* ============================
+   PRODUCTS PAGE – PAGE SPECIFIC STYLES
+   Common layout, typography, header, footer,
+   and navigation are handled by common.css
+============================ */
+
+/* ---------- MAIN CONTAINER ---------- */
+main {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* ---------- FORM SECTION ---------- */
+#form-section {
+  background: #fff;
+  border: 1px solid var(--border-color, #ddd);
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 24px;
+  box-shadow: var(--shadow-sm, 0 2px 4px rgba(0, 0, 0, 0.05));
+}
+
+#form-section h2 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  color: var(--text-primary, #333);
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+/* ---------- FORM FIELDS ---------- */
+#productForm {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.form-row input,
+.form-row textarea,
+.form-row select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 15px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-row input:focus,
+.form-row textarea:focus,
+.form-row select:focus {
+  outline: none;
+  border-color: var(--accent-color, #0055a5);
+  box-shadow: 0 0 0 3px rgba(0, 85, 165, 0.15);
+}
+
+.form-row textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.form-row:has(textarea) {
+  grid-template-columns: 1fr;
+}
+
+/* ---------- FORM BUTTONS ---------- */
+.buttons {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.buttons button {
+  padding: 10px 24px;
+  border: none;
+  border-radius: 4px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+#addBtn,
+#updateBtn {
+  background: var(--accent-color, #0055a5);
+  color: #fff;
+}
+
+#addBtn:hover,
+#updateBtn:hover {
+  background: #003d7a;
+}
+
+#cancelBtn {
+  background: #6c757d;
+  color: #fff;
+}
+
+#cancelBtn:hover {
+  background: #5a6268;
+}
+
+.buttons button:active {
+  transform: translateY(1px);
+}
+
+/* ---------- TABLE SECTION ---------- */
+#table-section {
+  background: #fff;
+  border: 1px solid var(--border-color, #ddd);
+  border-radius: 8px;
+  padding: 24px;
+  box-shadow: var(--shadow-sm, 0 2px 4px rgba(0, 0, 0, 0.05));
+  overflow-x: auto;
+}
+
+#table-section h2 {
+  margin: 0 0 20px;
+  color: var(--text-primary, #333);
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+/* ---------- PRODUCT TABLE ---------- */
+#productsTable {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 800px;
+  background: #fff;
+}
+
+#productsTable thead {
+  background: #f8f9fa;
+  border-bottom: 2px solid #dee2e6;
+}
+
+#productsTable th {
+  padding: 12px 16px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 14px;
+  color: #495057;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+#productsTable tbody tr {
+  border-bottom: 1px solid #e9ecef;
+  transition: background-color 0.15s ease;
+}
+
+#productsTable tbody tr:hover {
+  background-color: #f8f9fa;
+}
+
+#productsTable td {
+  padding: 12px 16px;
+  font-size: 14px;
+  color: #212529;
+  word-wrap: break-word;
+}
+
+/* ---------- ACTION BUTTONS ---------- */
+.action-btn {
+  padding: 6px 16px;
+  border: none;
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.edit-btn {
+  background: #ffc107;
+  color: #000;
+}
+
+.edit-btn:hover {
+  background: #e0a800;
+}
+
+.delete-btn {
+  background: #dc3545;
+  color: #fff;
+  margin-left: 8px;
+}
+
+.delete-btn:hover {
+  background: #c82333;
+}
+
+/* ---------- ADD PRODUCT BUTTON ---------- */
+#showAddFormBtn {
+  background: var(--accent-color, #0055a5);
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+#showAddFormBtn:hover {
+  background: #003d7a;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 85, 165, 0.2);
+}
+
+/* ---------- DIVIDER ---------- */
+hr {
+  border: none;
+  border-top: 1px solid #dee2e6;
+  margin: 24px 0;
+}
+
+/* ---------- RESPONSIVE DESIGN ---------- */
+@media (max-width: 1024px) {
+  main {
+    padding: 15px;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  #productsTable {
+    font-size: 13px;
+    min-width: 650px;
+  }
+
+  .buttons button {
+    flex: 1 1 45%;
+  }
+}
+
+@media (max-width: 600px) {
+  #form-section,
+  #table-section {
+    padding: 16px;
+  }
+
+  #form-section h2,
+  #table-section h2 {
+    font-size: 1.3rem;
+    text-align: center;
+  }
+
+  .buttons {
+    flex-direction: column;
+  }
+
+  .buttons button,
+  #showAddFormBtn {
+    width: 100%;
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  #productsTable {
+    font-size: 12px;
+    min-width: 500px;
+  }
+}
+
+/* ---------- EMPTY STATE ---------- */
+#productsTable tbody:empty::after {
+  content: "No products found. Click 'Add Product' to create your first product.";
+  display: block;
+  text-align: center;
+  padding: 40px 20px;
+  color: #6c757d;
+  font-style: italic;
+}
+
+/* ---------- ALERTS ---------- */
+.alert {
+  padding: 12px 16px;
+  border-radius: 4px;
+  margin-bottom: 16px;
+  font-size: 14px;
+}
+
+.alert-success {
+  background: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.alert-error {
+  background: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}

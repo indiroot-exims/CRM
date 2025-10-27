@@ -1,0 +1,231 @@
+/* ================================
+   SUPPLIERS PAGE - SPECIFIC STYLES
+   ================================ */
+
+/* ===== TOOLBAR (Search & Add Section) ===== */
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #ffffff;
+  padding: 10px 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin: 20px auto;
+  border-radius: 6px;
+  max-width: 95%;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.toolbar input[type="text"] {
+  width: 200px;
+  padding: 7px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 13px;
+}
+
+.btn.primary {
+  background-color: #3f51b5;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn.primary:hover {
+  background-color: #303f9f;
+}
+
+/* ===== SUPPLIER FORM ===== */
+.form-container {
+  background: white;
+  margin: 20px auto;
+  width: 90%;
+  max-width: 700px;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  display: none; /* hidden by default until triggered */
+}
+
+.form-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.form-container label {
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.form-container input,
+.form-container textarea {
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 60px;
+}
+
+.form-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+/* ===== BUTTONS ===== */
+.btn {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 13px;
+  transition: 0.3s;
+}
+
+.btn.success {
+  background-color: #4caf50;
+  color: white;
+}
+
+.btn.success:hover {
+  background-color: #388e3c;
+}
+
+.btn.info {
+  background-color: #2196f3;
+  color: white;
+}
+
+.btn.info:hover {
+  background-color: #1976d2;
+}
+
+.btn.danger {
+  background-color: #f44336;
+  color: white;
+}
+
+.btn.danger:hover {
+  background-color: #d32f2f;
+}
+
+/* ===== SUPPLIER TABLE ===== */
+.table-section {
+  margin: 20px auto;
+  width: 95%;
+  background: white;
+  border-radius: 8px;
+  padding: 15px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+thead {
+  background-color: #3f51b5;
+  color: white;
+}
+
+th, td {
+  padding: 10px 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+tbody tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* ===== ACTION BUTTONS IN TABLE ===== */
+.action-btn {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 3px;
+  color: white;
+  cursor: pointer;
+  font-size: 12px;
+  transition: 0.3s;
+}
+
+.edit-btn {
+  background-color: #03a9f4;
+}
+
+.edit-btn:hover {
+  background-color: #0288d1;
+}
+
+.delete-btn {
+  background-color: #f44336;
+}
+
+.delete-btn:hover {
+  background-color: #d32f2f;
+}
+
+/* ===== MESSAGE BOX (Popup for Success/Error) ===== */
+.message-box {
+  position: fixed;
+  bottom: 15px;
+  right: 15px;
+  padding: 10px 20px;
+  border-radius: 4px;
+  color: white;
+  font-weight: 500;
+  display: none;
+  z-index: 999;
+}
+
+.msg.info {
+  background-color: #2196f3;
+}
+
+.msg.success {
+  background-color: #4caf50;
+}
+
+.msg.error {
+  background-color: #f44336;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 768px) {
+  .toolbar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .toolbar input[type="text"] {
+    width: 100%;
+  }
+
+  .form-container {
+    width: 95%;
+  }
+
+  table th, table td {
+    font-size: 13px;
+    padding: 8px;
+  }
+
+  .form-buttons {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
