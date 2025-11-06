@@ -1,4 +1,4 @@
-const scriptURL = "https://script.google.com/macros/s/AKfycbywtNWooKfIiBOmwzYyVJE2WYIAvYVMghIKpHMR9Ua3gnoHWqbAF62rDRXszG7dndWmLA/exec";
+const scriptURL = "https://script.google.com/macros/s/AKfycbybwFLsKI8D65lBb9arh51EOwFsjvThTZbbdF5UE5PR2_DQPgfzSv0m-J7TzFGLBJBW4g/exec";
 
 let editingProductId = null;
 
@@ -179,3 +179,4 @@ function formatDateDisplay(cell) {
   if (/^\d{2}\/\d{2}\/\d{4}$/.test(cell)) return cell;
   return cell;
 }
+
