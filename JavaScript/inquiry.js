@@ -1,4 +1,4 @@
-const scriptURL = "https://script.google.com/macros/s/AKfycbwyE_nB_uT1Ow8t96oTRiEGz6UVdMF6JGNzTSepCI6IEiajipMD4vHQx5TnS1QGNY8DpA/exec";
+const scriptURL = "https://script.google.com/macros/s/AKfycbybwFLsKI8D65lBb9arh51EOwFsjvThTZbbdF5UE5PR2_DQPgfzSv0m-J7TzFGLBJBW4g/exec";
 
 let editingSubInquiryId = null;
 let productMap = {};
@@ -320,3 +320,4 @@ function filterInquiries() {
 
   displayInquiries(filtered);
 }
+
