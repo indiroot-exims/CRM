@@ -1,4 +1,4 @@
-const scriptURL = "https://script.google.com/macros/s/AKfycbybwFLsKI8D65lBb9arh51EOwFsjvThTZbbdF5UE5PR2_DQPgfzSv0m-J7TzFGLBJBW4g/exec";
+const scriptURL = "https://script.google.com/macros/s/AKfycby1JswV6CT9ybHu9HTCA176qxIaK8aZaRrfihDf3q-kM6wgMfqyCy8lJqP3rRjgHdkL-w/exec";
 
 let editingCustomerId = null;
 
@@ -6,7 +6,7 @@ let editingCustomerId = null;
 function checkAuth() {
   const userName = localStorage.getItem("userName");
   const userRole = localStorage.getItem("userRole");
-  
+
   if (!userName || !userRole) {
     alert("You must be logged in to access this page.");
     window.location.href = "../Html/login.html";
@@ -24,55 +24,41 @@ function logout() {
 
 // ===== PAGE INITIALIZATION =====
 document.addEventListener("DOMContentLoaded", () => {
-  // Check authentication first
   if (!checkAuth()) return;
-  
-  // Display user info
+
   document.getElementById("userName").textContent = localStorage.getItem("userName") || '';
   document.getElementById("userRole").textContent = localStorage.getItem("userRole") || '';
   document.getElementById("customerFormContainer").style.display = "none";
+
   loadCustomers();
 
-  // Logout button handler
+  // Button bindings
   document.getElementById("logoutBtn").addEventListener("click", logout);
-
-  // Form buttons
   document.getElementById("showAddFormBtn").addEventListener("click", e => {
     e.preventDefault();
     showAddCustomerForm();
   });
-  
-  document.getElementById("addBtn").addEventListener("click", async (e) => {
+  document.getElementById("addBtn").addEventListener("click", e => {
     e.preventDefault();
-    await submitCustomer(false);
+    submitCustomer(false);
   });
-  
-  document.getElementById("updateBtn").addEventListener("click", async (e) => {
+  document.getElementById("updateBtn").addEventListener("click", e => {
     e.preventDefault();
-    await submitCustomer(true);
+    submitCustomer(true);
   });
-  
-  document.getElementById("cancelBtn").addEventListener("click", (e) => {
+  document.getElementById("cancelBtn").addEventListener("click", e => {
     e.preventDefault();
     hideForm();
   });
-  
-  // Search filters
+
+  // Search Filters
   document.getElementById("searchName").addEventListener("input", filterCustomers);
   document.getElementById("searchPhone").addEventListener("input", filterCustomers);
 
-  // Navigation buttons
-  document.getElementById("dashboardBtn").addEventListener("click", () => {
-    window.location.href = "dashboard.html";
-  });
-
-  document.getElementById("productsBtn").addEventListener("click", () => {
-    window.location.href = "products.html";
-  });
-
-  document.getElementById("suppliersBtn").addEventListener("click", () => {
-    window.location.href = "suppliers.html";
-  });
+  // Navigation
+  document.getElementById("dashboardBtn").addEventListener("click", () => window.location.href = "dashboard.html");
+  document.getElementById("productsBtn").addEventListener("click", () => window.location.href = "products.html");
+  document.getElementById("suppliersBtn").addEventListener("click", () => window.location.href = "suppliers.html");
 });
 
 // ===== FORM MANAGEMENT =====
@@ -123,53 +109,55 @@ async function submitCustomer(isUpdate) {
   try {
     const response = await fetch(scriptURL, {
       method: "POST",
-      body: formData
+      body: formData,
+      mode: "cors"
     });
     const result = await response.json();
+
     if (result.success) {
       alert(isUpdate ? "Customer updated successfully!" : "Customer added successfully!");
       hideForm();
-      loadCustomers();
+      await loadCustomers();
     } else {
-      alert("Error: " + result.message);
+      alert("Error: " + (result.message || "Unknown error."));
     }
   } catch (error) {
-    console.error(`Error ${isUpdate ? "updating" : "adding"} customer:`, error);
-    alert(`Failed to ${isUpdate ? "update" : "add"} customer.`);
+    console.error("❌ Fetch Error:", error);
+    alert("Failed to connect to server. Please check your internet or Apps Script deployment.");
   }
 }
 
+// ===== LOAD CUSTOMERS =====
 async function loadCustomers() {
   try {
-    const response = await fetch(`${scriptURL}?getCustomers`);
+    const response = await fetch(`${scriptURL}?getCustomers=true`, { mode: "cors" });
     const data = await response.json();
+
+    if (!Array.isArray(data)) throw new Error("Invalid data format received.");
     window._loadedCustomerRows = data;
     displayCustomers(data);
   } catch (error) {
-    console.error("Error loading customers:", error);
+    console.error("❌ Error loading customers:", error);
+    alert("Unable to fetch customers. Please try again later.");
   }
 }
 
+// ===== DISPLAY CUSTOMERS =====
 function displayCustomers(data) {
   const tableBody = document.querySelector("#customersTable tbody");
+  if (!tableBody) return;
   tableBody.innerHTML = "";
-  
+
   data.forEach((row, idx) => {
     const tr = document.createElement("tr");
-    
-    // Row structure: [CustomerID, Name, Phone, Email, Address, CreatedDate]
+
     row.forEach((cell, colIdx) => {
       const td = document.createElement("td");
-      // Format date column (index 5 - CreatedDate)
-      if (colIdx === 5) {
-        td.textContent = formatDateDisplay(cell);
-      } else {
-        td.textContent = cell;
-      }
+      td.textContent = (colIdx === 5) ? formatDateDisplay(cell) : (cell || "");
       tr.appendChild(td);
     });
-    
-    // Add action buttons
+
+    // Add Action Button
     const actionTd = document.createElement("td");
     actionTd.innerHTML = `<button class="action-btn edit-btn" onclick="editCustomer(${idx})">Edit</button>`;
     tr.appendChild(actionTd);
@@ -177,24 +165,26 @@ function displayCustomers(data) {
   });
 }
 
-// Edit customer: load data into form
+// ===== EDIT CUSTOMER =====
 window.editCustomer = function (idx) {
   const rowData = window._loadedCustomerRows[idx];
-  // Row structure: [CustomerID, Name, Phone, Email, Address, CreatedDate]
+  if (!rowData) return;
+
   editingCustomerId = rowData[0];
-  document.getElementById("name").value = rowData[1];
-  document.getElementById("phone").value = rowData[2];
+  document.getElementById("name").value = rowData[1] || "";
+  document.getElementById("phone").value = rowData[2] || "";
   document.getElementById("email").value = rowData[3] || "";
   document.getElementById("address").value = rowData[4] || "";
   showEditCustomerForm();
 };
 
+// ===== DATE FORMATTER =====
 function formatDateDisplay(cell) {
+  if (!cell) return "";
   if (/^\d{4}-\d{2}-\d{2}/.test(cell)) {
-    const parts = cell.split(/[-T]/);
-    return `${parts[2]}/${parts[1]}/${parts[0]}`;
+    const [year, month, day] = cell.split(/[-T]/);
+    return `${day}/${month}/${year}`;
   }
-  if (/^\d{2}\/\d{2}\/\d{4}$/.test(cell)) return cell;
   return cell;
 }
 
@@ -203,26 +193,16 @@ function filterCustomers() {
   const nameFilter = document.getElementById("searchName").value.trim().toLowerCase();
   const phoneFilter = document.getElementById("searchPhone").value.trim();
 
-  // Only one active at a time, or neither
-  if ((nameFilter.length < 3 && phoneFilter.length < 3) || (nameFilter && phoneFilter)) {
+  if ((!nameFilter && !phoneFilter) || (nameFilter && phoneFilter)) {
     displayCustomers(window._loadedCustomerRows);
     return;
   }
-  
-  let filtered = [];
-  if (nameFilter.length >= 3 && !phoneFilter) {
-    filtered = window._loadedCustomerRows.filter(row => {
-      const name = (row[1] || "").toLowerCase();
-      return name.includes(nameFilter);
-    });
-  } else if (phoneFilter.length >= 3 && !nameFilter) {
-    filtered = window._loadedCustomerRows.filter(row => {
-      const phone = String(row[2] || "");
-      return phone.includes(phoneFilter);
-    });
-  } else {
-    filtered = window._loadedCustomerRows;
-  }
+
+  let filtered = window._loadedCustomerRows.filter(row => {
+    const name = (row[1] || "").toLowerCase();
+    const phone = String(row[2] || "");
+    return (nameFilter && name.includes(nameFilter)) || (phoneFilter && phone.includes(phoneFilter));
+  });
+
   displayCustomers(filtered);
 }
-
