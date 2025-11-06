@@ -127,6 +127,68 @@ async function loadInquiries() {
   }
 }
 
+
+function displayInquiries(data) {
+  const tableBody = document.querySelector("#inquiriesTable tbody");
+  tableBody.innerHTML = "";
+
+  // ===== SORTING LOGIC =====
+  // Define priority for each status
+  const statusPriority = {
+    "In Process": 1,
+    "Pending": 2,
+    "Closed": 3
+  };
+
+  // Sort based on status first, then by latest date (descending)
+  const sortedData = [...data].sort((a, b) => {
+    const statusA = statusPriority[a[6]] || 4; // Status column index = 6
+    const statusB = statusPriority[b[6]] || 4;
+
+    if (statusA !== statusB) return statusA - statusB;
+
+    // Compare Inquiry Date (column index = 8)
+    const dateA = new Date(a[8]);
+    const dateB = new Date(b[8]);
+    return dateB - dateA; // latest first
+  });
+
+  // ===== DISPLAY ROWS =====
+  sortedData.forEach((row, idx) => {
+    const tr = document.createElement("tr");
+
+    row.forEach((cell, colIdx) => {
+      const td = document.createElement("td");
+
+      if (colIdx === 2) {
+        td.textContent = customerMap[cell] || cell; // CustomerID → Name
+      } else if (colIdx === 3) {
+        td.textContent = productMap[cell] || cell; // ProductID → Name
+      } else if (colIdx === 8 || colIdx === 9) {
+        td.textContent = formatDateDisplay(cell);
+      } else if (colIdx === 7) {
+        // Note column – wrap text properly
+        td.textContent = cell;
+        td.style.whiteSpace = "normal";
+        td.style.wordBreak = "break-word";
+        td.style.maxWidth = "200px";
+      } else {
+        td.textContent = cell;
+      }
+
+      tr.appendChild(td);
+    });
+
+    // Action Button
+    const actionTd = document.createElement("td");
+    actionTd.innerHTML = `<button class="action-btn edit-btn" onclick="editInquiry(${idx})">Edit</button>`;
+    tr.appendChild(actionTd);
+
+    tableBody.appendChild(tr);
+  });
+}
+
+
 // ===== FORM MANAGEMENT =====
 function showAddInquiryForm() {
   document.getElementById("inquiryForm").reset();
@@ -345,3 +407,4 @@ function filterInquiries() {
   
   displayInquiries(filtered);
 }
+
