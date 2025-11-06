@@ -130,7 +130,7 @@ function displayInquiries(data) {
     return new Date(b[8]) - new Date(a[8]); // Latest first
   });
 
-  sorted.forEach((row, idx) => {
+  sorted.forEach(row => {
     const tr = document.createElement("tr");
 
     row.forEach((cell, colIdx) => {
@@ -150,7 +150,8 @@ function displayInquiries(data) {
     });
 
     const action = document.createElement("td");
-    action.innerHTML = `<button class="action-btn edit-btn" onclick="editInquiry(${idx})">Edit</button>`;
+    // Pass unique ID instead of index
+    action.innerHTML = `<button class="action-btn edit-btn" onclick="editInquiryById('${row[0]}')">Edit</button>`;
     tr.appendChild(action);
 
     tbody.appendChild(tr);
@@ -265,9 +266,11 @@ async function submitInquiry(isUpdate) {
   }
 }
 
-// ===== EDIT =====
-window.editInquiry = idx => {
-  const r = window._loadedInquiryRows[idx];
+// ===== EDIT (Updated) =====
+window.editInquiryById = id => {
+  const r = window._loadedInquiryRows.find(row => row[0] === id);
+  if (!r) return alert("Inquiry not found!");
+
   editingSubInquiryId = r[0];
   document.getElementById("customerId").value = r[2];
   document.getElementById("productsArea").innerHTML = "";
