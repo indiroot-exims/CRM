@@ -1,4 +1,4 @@
-const scriptURL = "https://script.google.com/macros/s/AKfycbybwFLsKI8D65lBb9arh51EOwFsjvThTZbbdF5UE5PR2_DQPgfzSv0m-J7TzFGLBJBW4g/exec";
+const scriptURL = "https://script.google.com/macros/s/AKfycby1JswV6CT9ybHu9HTCA176qxIaK8aZaRrfihDf3q-kM6wgMfqyCy8lJqP3rRjgHdkL-w/exec";
 
 let editingSupplierId = null;
 
@@ -26,56 +26,58 @@ function logout() {
 document.addEventListener("DOMContentLoaded", () => {
   if (!checkAuth()) return;
 
-  document.getElementById("userName").textContent = localStorage.getItem("userName") || '';
-  document.getElementById("userRole").textContent = localStorage.getItem("userRole") || '';
-  document.getElementById("supplierFormContainer").style.display = "none";
+  const userNameEl = document.getElementById("userName");
+  const userRoleEl = document.getElementById("userRole");
+  const formContainer = document.getElementById("supplierFormContainer");
+
+  if (userNameEl) userNameEl.textContent = localStorage.getItem("userName") || '';
+  if (userRoleEl) userRoleEl.textContent = localStorage.getItem("userRole") || '';
+  if (formContainer) formContainer.style.display = "none";
 
   loadSuppliers();
-  loadProductsDropdown(); // ✅ Load product list for dropdown
+  loadProductsDropdown();
 
-  document.getElementById("logoutBtn").addEventListener("click", logout);
+  // ===== NAVIGATION =====
+  document.getElementById("logoutBtn")?.addEventListener("click", logout);
+  document.getElementById("dashboardBtn")?.addEventListener("click", () => window.location.href = "dashboard.html");
+  document.getElementById("customersBtn")?.addEventListener("click", () => window.location.href = "customers.html");
+  document.getElementById("productsBtn")?.addEventListener("click", () => window.location.href = "products.html");
 
-  document.getElementById("showAddFormBtn").addEventListener("click", (e) => {
+  // ===== FORM BUTTONS =====
+  document.getElementById("showAddFormBtn")?.addEventListener("click", (e) => {
     e.preventDefault();
     showAddSupplierForm();
   });
 
-  document.getElementById("addBtn").addEventListener("click", async (e) => {
+  document.getElementById("addBtn")?.addEventListener("click", async (e) => {
     e.preventDefault();
     await submitSupplier(false);
   });
 
-  document.getElementById("updateBtn").addEventListener("click", async (e) => {
+  document.getElementById("updateBtn")?.addEventListener("click", async (e) => {
     e.preventDefault();
     await submitSupplier(true);
   });
 
-  document.getElementById("cancelBtn").addEventListener("click", (e) => {
+  document.getElementById("cancelBtn")?.addEventListener("click", (e) => {
     e.preventDefault();
     hideForm();
   });
 
-  document.getElementById("searchName").addEventListener("input", filterSuppliers);
-  document.getElementById("searchPhone").addEventListener("input", filterSuppliers);
-
-  document.getElementById("dashboardBtn").addEventListener("click", () => {
-    window.location.href = "dashboard.html";
-  });
-  document.getElementById("customersBtn").addEventListener("click", () => {
-    window.location.href = "customers.html";
-  });
-  document.getElementById("productsBtn").addEventListener("click", () => {
-    window.location.href = "products.html";
-  });
+  // ===== FILTERS =====
+  document.getElementById("searchName")?.addEventListener("input", filterSuppliers);
+  document.getElementById("searchPhone")?.addEventListener("input", filterSuppliers);
 });
 
 // ===== LOAD PRODUCTS INTO DROPDOWN =====
 async function loadProductsDropdown() {
   try {
-    const res = await fetch(`${scriptURL}?getProducts=true`);
-    const data = await res.json();
+    const response = await fetch(`${scriptURL}?getProducts=true`, { mode: "cors" });
+    const data = await response.json();
 
     const dropdown = document.getElementById("productName");
+    if (!dropdown) return;
+
     dropdown.innerHTML = `<option value="">Select Product</option>`;
 
     data.forEach(row => {
@@ -85,7 +87,7 @@ async function loadProductsDropdown() {
       dropdown.appendChild(option);
     });
   } catch (err) {
-    console.error("Error loading products:", err);
+    console.error("❌ Error loading products:", err);
   }
 }
 
@@ -138,60 +140,65 @@ async function submitSupplier(isUpdate) {
   formData.append("productCategory", productCategory);
   formData.append("productName", productName);
   formData.append("rate", rate);
-
   if (isUpdate && editingSupplierId) formData.append("supplierId", editingSupplierId);
 
   try {
-    const response = await fetch(scriptURL, { method: "POST", body: formData });
+    const response = await fetch(scriptURL, {
+      method: "POST",
+      body: formData,
+      mode: "cors"
+    });
     const result = await response.json();
+
     if (result.success) {
       alert(isUpdate ? "Supplier updated successfully!" : "Supplier added successfully!");
       hideForm();
-      loadSuppliers();
+      await loadSuppliers();
     } else {
-      alert("Error: " + result.message);
+      alert("Error: " + (result.message || "Unknown error occurred."));
     }
   } catch (error) {
-    console.error(`Error ${isUpdate ? "updating" : "adding"} supplier:`, error);
-    alert(`Failed to ${isUpdate ? "update" : "add"} supplier.`);
+    console.error("❌ Error submitting supplier:", error);
+    alert(`Failed to ${isUpdate ? "update" : "add"} supplier. Please try again.`);
   }
 }
 
+// ===== LOAD SUPPLIERS =====
 async function loadSuppliers() {
   try {
-    const response = await fetch(`${scriptURL}?getSuppliers`);
+    const response = await fetch(`${scriptURL}?getSuppliers=true`, { mode: "cors" });
     const data = await response.json();
+
+    if (!Array.isArray(data)) throw new Error("Invalid data format from server.");
     window._loadedSupplierRows = data;
     displaySuppliers(data);
   } catch (error) {
-    console.error("Error loading suppliers:", error);
+    console.error("❌ Error loading suppliers:", error);
+    alert("Failed to load supplier list. Please refresh or check Apps Script deployment.");
   }
 }
 
+// ===== DISPLAY SUPPLIERS =====
 function displaySuppliers(data) {
   const tableBody = document.querySelector("#suppliersTable tbody");
+  if (!tableBody) return;
+
   tableBody.innerHTML = "";
 
   data.forEach((row, idx) => {
     const tr = document.createElement("tr");
 
-    // Updated Row: [SupplierID, Name, Phone, Email, Address, ProductCategory, ProductName, Rate, DateAdded]
+    // Row: [SupplierID, Name, Phone, Email, Address, ProductCategory, ProductName, Rate, DateAdded]
     row.forEach((cell, colIdx) => {
       const td = document.createElement("td");
-      // Format date column (index 8 - DateAdded)
-      if (colIdx === 8) {
-        td.textContent = formatDateDisplay(cell);
-      } else {
-        td.textContent = cell;
-      }
+      td.textContent = (colIdx === 8) ? formatDateDisplay(cell) : (cell || "");
       tr.appendChild(td);
     });
 
     const actionTd = document.createElement("td");
-    actionTd.innerHTML = `
-      <button class="action-btn edit-btn" onclick="editSupplier(${idx})">Edit</button>
-    `;
+    actionTd.innerHTML = `<button class="action-btn edit-btn" onclick="editSupplier(${idx})">Edit</button>`;
     tr.appendChild(actionTd);
+
     tableBody.appendChild(tr);
   });
 }
@@ -199,9 +206,11 @@ function displaySuppliers(data) {
 // ===== EDIT SUPPLIER =====
 window.editSupplier = function (idx) {
   const rowData = window._loadedSupplierRows[idx];
+  if (!rowData) return;
+
   editingSupplierId = rowData[0];
-  document.getElementById("name").value = rowData[1];
-  document.getElementById("phone").value = rowData[2];
+  document.getElementById("name").value = rowData[1] || "";
+  document.getElementById("phone").value = rowData[2] || "";
   document.getElementById("email").value = rowData[3] || "";
   document.getElementById("address").value = rowData[4] || "";
   document.getElementById("productCategory").value = rowData[5] || "";
@@ -212,11 +221,11 @@ window.editSupplier = function (idx) {
 
 // ===== FORMAT DATE =====
 function formatDateDisplay(cell) {
+  if (!cell) return "";
   if (/^\d{4}-\d{2}-\d{2}/.test(cell)) {
-    const parts = cell.split(/[-T]/);
-    return `${parts[2]}/${parts[1]}/${parts[0]}`;
+    const [year, month, day] = cell.split(/[-T]/);
+    return `${day}/${month}/${year}`;
   }
-  if (/^\d{2}\/\d{2}\/\d{4}$/.test(cell)) return cell;
   return cell;
 }
 
@@ -225,19 +234,16 @@ function filterSuppliers() {
   const nameFilter = document.getElementById("searchName").value.trim().toLowerCase();
   const phoneFilter = document.getElementById("searchPhone").value.trim();
 
-  if ((nameFilter.length < 3 && phoneFilter.length < 3) || (nameFilter && phoneFilter)) {
+  if ((!nameFilter && !phoneFilter) || (nameFilter && phoneFilter)) {
     displaySuppliers(window._loadedSupplierRows);
     return;
   }
 
-  let filtered = [];
-  if (nameFilter.length >= 3 && !phoneFilter) {
-    filtered = window._loadedSupplierRows.filter(row => (row[1] || "").toLowerCase().includes(nameFilter));
-  } else if (phoneFilter.length >= 3 && !nameFilter) {
-    filtered = window._loadedSupplierRows.filter(row => String(row[2] || "").includes(phoneFilter));
-  } else {
-    filtered = window._loadedSupplierRows;
-  }
+  const filtered = window._loadedSupplierRows.filter(row => {
+    const name = (row[1] || "").toLowerCase();
+    const phone = String(row[2] || "");
+    return (nameFilter && name.includes(nameFilter)) || (phoneFilter && phone.includes(phoneFilter));
+  });
+
   displaySuppliers(filtered);
 }
-
