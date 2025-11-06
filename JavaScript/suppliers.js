@@ -1,4 +1,4 @@
-const scriptURL = "https://script.google.com/macros/s/AKfycbywtNWooKfIiBOmwzYyVJE2WYIAvYVMghIKpHMR9Ua3gnoHWqbAF62rDRXszG7dndWmLA/exec";
+const scriptURL = "https://script.google.com/macros/s/AKfycbybwFLsKI8D65lBb9arh51EOwFsjvThTZbbdF5UE5PR2_DQPgfzSv0m-J7TzFGLBJBW4g/exec";
 
 let editingSupplierId = null;
 
@@ -240,3 +240,4 @@ function filterSuppliers() {
   }
   displaySuppliers(filtered);
 }
+
