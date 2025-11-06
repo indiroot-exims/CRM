@@ -9,6 +9,7 @@ main {
   max-width: 1600px;
   margin: 0 auto;
   padding: 20px;
+  overflow-x: hidden;
 }
 
 /* ---------- FORM SECTION ---------- */
@@ -72,7 +73,7 @@ main {
   box-shadow: 0 0 0 3px rgba(0, 85, 165, 0.15);
 }
 
-/* ---------- PRODUCTS SECTION (WITHIN FORM) ---------- */
+/* ---------- PRODUCTS SECTION ---------- */
 .products-section {
   background: #f8f9fa;
   border: 1px solid #dee2e6;
@@ -110,7 +111,7 @@ main {
   background: #218838;
 }
 
-/* ---------- PRODUCT ROW (INLINE PRODUCTS) ---------- */
+/* ---------- PRODUCT ROW ---------- */
 #productsArea {
   display: flex;
   flex-direction: column;
@@ -135,12 +136,6 @@ main {
   border-radius: 4px;
   font-size: 14px;
   width: 100%;
-}
-
-.product-row input:focus,
-.product-row select:focus {
-  outline: none;
-  border-color: var(--accent-color, #0055a5);
 }
 
 .product-row .remove-btn {
@@ -213,13 +208,7 @@ main {
   padding: 24px;
   box-shadow: var(--shadow-sm, 0 2px 4px rgba(0, 0, 0, 0.05));
   overflow-x: auto;
-}
-
-#table-section h2 {
-  margin: 0 0 20px;
-  color: var(--text-primary, #333);
-  font-size: 1.5rem;
-  font-weight: 600;
+  width: 100%;
 }
 
 /* ---------- INQUIRIES TABLE ---------- */
@@ -227,7 +216,9 @@ main {
   width: 100%;
   border-collapse: collapse;
   background: #fff;
-  min-width: 900px;
+  table-layout: fixed; /* ensures equal, consistent cell widths */
+  word-wrap: break-word;
+  word-break: break-word;
 }
 
 #inquiriesTable thead {
@@ -250,7 +241,10 @@ main {
   padding: 12px;
   font-size: 14px;
   color: #212529;
-  white-space: nowrap;
+  vertical-align: top;
+  white-space: normal; /* wrap text properly */
+  word-break: break-word;
+  overflow-wrap: anywhere;
 }
 
 #inquiriesTable tbody tr {
@@ -283,14 +277,14 @@ main {
   background: #e0a800;
 }
 
-/* ---------- HORIZONTAL RULE ---------- */
+/* ---------- HR ---------- */
 hr {
   border: none;
   border-top: 1px solid #dee2e6;
   margin: 24px 0;
 }
 
-/* ---------- EMPTY & LOADING STATES ---------- */
+/* ---------- EMPTY / LOADING STATES ---------- */
 #inquiriesTable tbody:empty::after {
   content: "No inquiries found. Click 'Add Inquiry' to create your first inquiry.";
   display: block;
@@ -306,16 +300,10 @@ hr {
   color: #6c757d;
 }
 
-/* ---------- STATUS STYLING ---------- */
-td:has(.status) {
-  font-weight: 500;
-}
-
 /* ---------- RESPONSIVE DESIGN ---------- */
 @media (max-width: 1024px) {
   .product-row {
     grid-template-columns: 1fr 1fr;
-    gap: 10px;
   }
 
   .product-row .remove-btn {
@@ -352,7 +340,6 @@ td:has(.status) {
   .products-header {
     flex-direction: column;
     align-items: stretch;
-    gap: 12px;
   }
 
   .add-product-btn {
@@ -361,15 +348,10 @@ td:has(.status) {
 
   .product-row {
     grid-template-columns: 1fr;
-    gap: 10px;
   }
 
   #table-section {
     padding: 16px;
-  }
-
-  #inquiriesTable {
-    min-width: 700px;
   }
 }
 
