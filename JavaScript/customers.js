@@ -131,9 +131,18 @@ async function submitCustomer(isUpdate) {
 async function loadCustomers() {
   try {
     const response = await fetch(`${scriptURL}?getCustomers=true`, { mode: "cors" });
-    const data = await response.json();
+    const rawData = await response.json();
 
-    if (!Array.isArray(data)) throw new Error("Invalid data format received.");
+    let data = [];
+    if (rawData.success && Array.isArray(rawData.data)) {
+      data = rawData.data;
+    } else if (Array.isArray(rawData)) {
+      data = rawData;
+    } else {
+      console.warn("Unexpected data format:", rawData);
+      throw new Error("Invalid data format received from server.");
+    }
+
     window._loadedCustomerRows = data;
     displayCustomers(data);
   } catch (error) {
@@ -157,7 +166,6 @@ function displayCustomers(data) {
       tr.appendChild(td);
     });
 
-    // Add Action Button
     const actionTd = document.createElement("td");
     actionTd.innerHTML = `<button class="action-btn edit-btn" onclick="editCustomer(${idx})">Edit</button>`;
     tr.appendChild(actionTd);
