@@ -73,11 +73,20 @@ document.addEventListener("DOMContentLoaded", () => {
 async function loadProductsDropdown() {
   try {
     const response = await fetch(`${scriptURL}?getProducts=true`, { mode: "cors" });
-    const data = await response.json();
+    const rawData = await response.json();
+
+    let data = [];
+    if (rawData.success && Array.isArray(rawData.data)) {
+      data = rawData.data;
+    } else if (Array.isArray(rawData)) {
+      data = rawData;
+    } else {
+      console.warn("⚠️ Unexpected product data format:", rawData);
+      throw new Error("Invalid product data format from server.");
+    }
 
     const dropdown = document.getElementById("productName");
     if (!dropdown) return;
-
     dropdown.innerHTML = `<option value="">Select Product</option>`;
 
     data.forEach(row => {
@@ -167,9 +176,18 @@ async function submitSupplier(isUpdate) {
 async function loadSuppliers() {
   try {
     const response = await fetch(`${scriptURL}?getSuppliers=true`, { mode: "cors" });
-    const data = await response.json();
+    const rawData = await response.json();
 
-    if (!Array.isArray(data)) throw new Error("Invalid data format from server.");
+    let data = [];
+    if (rawData.success && Array.isArray(rawData.data)) {
+      data = rawData.data;
+    } else if (Array.isArray(rawData)) {
+      data = rawData;
+    } else {
+      console.warn("⚠️ Unexpected supplier data format:", rawData);
+      throw new Error("Invalid data format from server.");
+    }
+
     window._loadedSupplierRows = data;
     displaySuppliers(data);
   } catch (error) {
