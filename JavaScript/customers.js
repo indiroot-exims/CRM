@@ -99,7 +99,7 @@ async function submitCustomer(isUpdate) {
   }
 
   const formData = new FormData();
-  formData.append(isUpdate ? "updateCustomer" : "addCustomer", "true");
+ formData.append("action", isUpdate ? "updateCustomer" : "addCustomer");
   formData.append("name", name);
   formData.append("phone", phone);
   formData.append("email", email);
@@ -214,3 +214,4 @@ function filterCustomers() {
 
   displayCustomers(filtered);
 }
+
