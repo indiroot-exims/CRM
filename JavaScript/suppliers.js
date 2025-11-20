@@ -141,7 +141,7 @@ async function submitSupplier(isUpdate) {
   }
 
   const formData = new FormData();
-  formData.append(isUpdate ? "updateSupplier" : "addSupplier", "true");
+ formData.append("action", isUpdate ? "updateSupplier" : "addSupplier");
   formData.append("name", name);
   formData.append("phone", phone);
   formData.append("email", email);
@@ -265,3 +265,4 @@ function filterSuppliers() {
 
   displaySuppliers(filtered);
 }
+
